@@ -555,7 +555,7 @@ function! s:L2U_SetTab(wait_insert_enter)
     endif
     for k in b:l2u_cmdtab_keys
       exec 'let trigger = char2nr("'.(k[0] == '<' ? '\' : '').k.'")'
-      exec 'cnoremap <buffer><expr> '.k.' LaTeXtoUnicode#CmdTab('.trigger.')'
+      " exec 'cnoremap <buffer><expr> '.k.' LaTeXtoUnicode#CmdTab('.trigger.')'
     endfor
     let b:l2u_cmdtab_set = 1
   endif
@@ -577,7 +577,7 @@ function! s:L2U_SetTab(wait_insert_enter)
   setlocal completefunc=LaTeXtoUnicode#completefunc
 
   let b:l2u_prev_map_tab = s:L2U_SetFallbackMapping('<Tab>', s:l2u_fallback_trigger)
-  imap <buffer> <Tab> <Plug>L2UTab
+  " imap <buffer> <Tab> <Plug>L2UTab
   inoremap <buffer><expr> <Plug>L2UTab LaTeXtoUnicode#Tab()
 
   let b:l2u_tab_set = 1
@@ -587,7 +587,7 @@ endfunction
 function! s:L2U_UnsetTab()
   if b:l2u_cmdtab_set
     for k in b:l2u_cmdtab_keys
-      exec 'cunmap <buffer> '.k
+      " exec 'cunmap <buffer> '.k
     endfor
     let b:l2u_cmdtab_set = 0
   endif
@@ -595,7 +595,7 @@ function! s:L2U_UnsetTab()
     return
   endif
   exec "setlocal completefunc=" . get(b:, "l2u_prev_completefunc", "")
-  iunmap <buffer> <Tab>
+  " iunmap <buffer> <Tab>
   if empty(maparg("<Tab>", "i"))
     call s:L2U_ReinstateMapping(b:l2u_prev_map_tab)
   endif
