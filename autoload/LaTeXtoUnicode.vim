@@ -577,7 +577,7 @@ function! s:L2U_SetTab(wait_insert_enter)
   setlocal completefunc=LaTeXtoUnicode#completefunc
 
   let b:l2u_prev_map_tab = s:L2U_SetFallbackMapping('<Tab>', s:l2u_fallback_trigger)
-  " imap <buffer> <Tab> <Plug>L2UTab
+  imap <buffer> <Tab> <Plug>L2UTab
   inoremap <buffer><expr> <Plug>L2UTab LaTeXtoUnicode#Tab()
 
   let b:l2u_tab_set = 1
@@ -595,7 +595,7 @@ function! s:L2U_UnsetTab()
     return
   endif
   exec "setlocal completefunc=" . get(b:, "l2u_prev_completefunc", "")
-  " iunmap <buffer> <Tab>
+  iunmap <buffer> <Tab>
   if empty(maparg("<Tab>", "i"))
     call s:L2U_ReinstateMapping(b:l2u_prev_map_tab)
   endif
